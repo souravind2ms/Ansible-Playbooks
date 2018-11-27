@@ -2,14 +2,34 @@
   hosts: localhost
   connection: local
   tasks:
+  - name: Create Resource Group
+    azure_rm_resourcegroup:
+      subscription_id: eb7cd46f-49f0-41d4-ac58-df812ca1c88f
+      name: AnsibleEnvironment
+      location: southindia
+  - name: Create Virtual Network
+    azure_rm_virtualnetwork:
+       subscription_id: eb7cd46f-49f0-41d4-ac58-df812ca1c88f
+       resource_group: AnsibleEnvironment
+       name: AnsibleEnvironmentVnet
+       address_prefixes: "10.0.0.0/16"
+  - name: Add subnet
+    azure_rm_subnet:
+      subscription_id: eb7cd46f-49f0-41d4-ac58-df812ca1c88f
+      resource_group: AnsibleEnvironment
+      name: AnsibleEnvironmentSubnet
+      address_prefix: "10.0.0.0/24"
+      virtual_network: AnsibleEnvironmentVnet
   - name: Create Public IP address
     azure_rm_publicipaddress:
-      resource_group: LinuxEnvironment
+      subscription_id: eb7cd46f-49f0-41d4-ac58-df812ca1c88f
+      resource_group: AnsibleEnvironment
       allocation_method: Static
       name: WebServer001VM-ip
   - name: Create Network Security Group that allows SSH
     azure_rm_securitygroup:
-      resource_group: LinuxEnvironment
+      subscription_id: eb7cd46f-49f0-41d4-ac58-df812ca1c88f
+      resource_group: AnsibleEnvironment
       name: WebServer001-nsg
       rules:
         - name: SSH
@@ -24,7 +44,7 @@
           access: Allow
           priority: 101
           direction: Inbound
-        - name: HTTP
+        - name: HTTPS
           protocol: Tcp
           destination_port_range: 443
           access: Allow
@@ -32,26 +52,28 @@
           direction: Inbound
   - name: Create Virtual Network Interface Card
     azure_rm_networkinterface:
-      resource_group: LinuxEnvironment
-      name: WebServer001NIC
-      virtual_network: Linux-VNET
-      subnet: default
-      public_ip_name:
+      subscription_id: eb7cd46f-49f0-41d4-ac58-df812ca1c88f
+      resource_group: AnsibleEnvironment
+      name: WebServer001-NIC
+      virtual_network: AnsibleEnvironmentVnet
+      subnet: AnsibleEnvironmentSubnet
+      public_ip_name: WebServer001VM-ip
       security_group: WebServer001-nsg
   - name: Create VM
     azure_rm_virtualmachine:
-      resource_group: LinuxEnvironment
+      subscription_id: eb7cd46f-49f0-41d4-ac58-df812ca1c88f
+      resource_group: AnsibleEnvironment
       name: WebServer001
-      vm_size: Standard_D2S_v3
+      vm_size: Standard_DS2_v2
       admin_username: soumi
+      admin_password: Passwordmicrosoft@123
       ssh_password_enabled: true
-      ssh_password: Passwordmicrosoft@123
       #ssh_public_keys: false
       #  - path: /home/azureuser/.ssh/authorized_keys
       #   key_data: <your-key-data>
-      network_interfaces: WebServer001NIC
+      network_interfaces: WebServer001-NIC
       image:
         offer: UbuntuServer
         publisher: Canonical
         sku: '18.04-LTS'
-        version: '18.04.201811010latest'
+        version: '18.04.201811010'
