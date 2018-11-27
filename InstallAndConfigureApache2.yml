@@ -1,4 +1,5 @@
-- host: apache2
+- name: Configure apache2
+  hosts: all
   tasks:
     - name: run echo command
       command: /bin/echo hello everyone!!
