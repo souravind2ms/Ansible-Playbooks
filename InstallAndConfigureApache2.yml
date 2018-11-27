@@ -1,5 +1,5 @@
 - name: Hello World Sample-sourav
-  hosts: apache
+  hosts: localhost
   become: yes
   become_method: sudo
   tasks:
