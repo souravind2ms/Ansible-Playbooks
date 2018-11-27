@@ -1,0 +1,4 @@
+- host: apache2
+  tasks:
+    - name: run echo command
+      command: /bin/echo hello everyone!!
