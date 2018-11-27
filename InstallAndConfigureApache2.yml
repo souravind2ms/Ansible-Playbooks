@@ -1,6 +1,6 @@
-- name: Hello World Sample-sourav
-  hosts: localhost
-  become: yes
+- name: Install Apache2
+  hosts: all
+  remote_user: soumi
   #become_method: sudo
   tasks:
     - name: Install Apache 
