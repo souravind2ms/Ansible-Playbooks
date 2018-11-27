@@ -1,3 +1,4 @@
+---
 - hosts: apache
   tasks:
     - name: run echo command
