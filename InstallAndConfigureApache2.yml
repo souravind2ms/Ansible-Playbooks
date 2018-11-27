@@ -1,5 +1,6 @@
 - name: Hello World Sample-sourav
   hosts: apache
+  sudo: yes
   tasks:
-    - name: run echo command
-      command: /bin/echo hello everyone!!
+    - name: Install Apache 
+      apt: name=apache2 update_cache=yes state=latest
