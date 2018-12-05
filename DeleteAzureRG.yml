@@ -1,0 +1,10 @@
+- name: Delete a Azure Resource Group
+  hosts: localhost
+  connection: local
+  tasks: 
+  - name: Deleting Resource Group......
+    azure_rm_resourcegroup:
+      subscription_id: eb7cd46f-49f0-41d4-ac58-df812ca1c88f
+      name: AnsibleEnvironment
+      state: absent
+  
