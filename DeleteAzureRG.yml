@@ -6,5 +6,7 @@
     azure_rm_resourcegroup:
       subscription_id: eb7cd46f-49f0-41d4-ac58-df812ca1c88f
       name: AnsibleEnvironment
+      location: southindia
       state: absent
+      force: True
   
