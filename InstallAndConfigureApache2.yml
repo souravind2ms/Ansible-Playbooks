@@ -9,8 +9,8 @@
     - name: Ensure apache2 service is running
       #sudo: yes
       command: systemctl status apache2
-      ignore_errors: yes
-      changed_when: false
+      #ignore_errors: yes
+      #changed_when: false
       #service_facts:
       #register: services_state
       register: apache2_service_status
