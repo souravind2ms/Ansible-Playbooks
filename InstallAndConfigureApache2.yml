@@ -3,7 +3,7 @@
   remote_user: soumi
   #become_method: sudo
   tasks:
-    - name: Install Apache 
+    - name: Install Apache2 
       apt: name=apache2 update_cache=yes state=latest
     - name: ensure apache2 service is running
       service: 
@@ -15,4 +15,3 @@
       when: apache2_status.stdout.find("running") != -1
     - debug: msg="apache2 service is not running"
       when: apache2_status.stdout.find("running") == -1
-      
