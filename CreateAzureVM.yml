@@ -65,7 +65,7 @@
       resource_group: AnsibleEnvironment
       name: WebServer001
       vm_size: Standard_DS2_v2
-      managed_disk_type: StandardSSD_LRS
+      managed_disk_type: Standard_LRS
       admin_username: soumi
       admin_password: Passwordmicrosoft@123
       ssh_password_enabled: true
