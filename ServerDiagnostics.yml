@@ -11,8 +11,9 @@
 
     - name: Pulling VM Status.
       command: sh /home/soumi/ShellScripts/vmstatus.sh
-      register: cmd_result
+      register: out
 
-    - debug: msg="{{ cmd_result.stdout }}"
+    - debug:
+        var: out.stdout_lines 
 
-    - debug: msg="{{ cmd_result.stderr }}"
+  
