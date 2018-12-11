@@ -2,6 +2,5 @@
   hosts: all
   remote_user: soumi
   tasks:
-    - name: Ping Test
-      tasks:
-        - action: ping
+    - name: Server Heartbeat check
+      action: ping
