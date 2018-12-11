@@ -11,3 +11,7 @@
 
     - name: Pulling VM Status.
       command: sh /home/soumi/ShellScripts/vmstatus.sh
+      register: vmstatus
+
+    - debug:
+        var: vmstatus.stdout_lines
