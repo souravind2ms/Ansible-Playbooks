@@ -1,6 +1,13 @@
 - name: Server Diagnostics
   hosts: all
   remote_user: soumi
+  become_method: sudo
   tasks:
     - name: Server Heartbeat check
       action: ping
+      
+    - name: Transfer and execute a script
+      copy: src=/home/soumi/ShellScripts/vmstatus.sh dest=/home/soumi/ShellScripts mode=0777
+
+    - name: Pulling VM Status.
+      command: sh /home/soumi/ShellScripts/vmstatus.sh
