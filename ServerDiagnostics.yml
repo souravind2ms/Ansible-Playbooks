@@ -1,0 +1,7 @@
+- name: Server Diagnostics
+  hosts: all
+  remote_user: soumi
+  tasks:
+    - name: Ping Test
+      ping: 
+        data: crash
