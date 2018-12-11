@@ -3,5 +3,5 @@
   remote_user: soumi
   tasks:
     - name: Ping Test
-      ping: 
-        data: crash
+      tasks:
+        - action: ping
